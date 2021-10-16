@@ -22,4 +22,21 @@
         <url-pattern>/parameterServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Servlet1</servlet-name>
+        <servlet-class>com.kingfarou.servlet.Servlet1</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Servlet1</servlet-name>
+        <url-pattern>/servlet1</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Servlet2</servlet-name>
+        <servlet-class>com.kingfarou.servlet.Servlet2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Servlet2</servlet-name>
+        <url-pattern>/servlet2</url-pattern>
+    </servlet-mapping>
 </web-app>
