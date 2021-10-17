@@ -22,7 +22,7 @@ public abstract class BaseDao {
      * @param args
      * @return -1:改动数据失败；成功则返回影响行数
      */
-    public static int update(String sql, String ...args){
+    public static int update(String sql, Object ...args){
         Connection connection = JdbcUtils.getConnection();
         try {
             int row = queryRunner.update(connection, sql, args);
