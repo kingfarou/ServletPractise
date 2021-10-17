@@ -20,7 +20,7 @@ public abstract class BaseDao {
      * 增删改操作
      * @param sql
      * @param args
-     * @return
+     * @return -1:改动数据失败；成功则返回影响行数
      */
     public static int update(String sql, String ...args){
         Connection connection = JdbcUtils.getConnection();
@@ -41,7 +41,7 @@ public abstract class BaseDao {
      * @param sql
      * @param args
      * @param <T>
-     * @return
+     * @return null：查询失败；成功则返回查询结果
      */
     public static <T> T queryForOne(Class<T> type, String sql, Object ...args){
         Connection connection = JdbcUtils.getConnection();
@@ -61,7 +61,7 @@ public abstract class BaseDao {
      * @param sql
      * @param args
      * @param <T>
-     * @return
+     * @return null：查询失败；成功则返回查询结果
      */
     public static <T> List<T> queryForList(Class<T> type, String sql, Object ...args){
         Connection connection = JdbcUtils.getConnection();
@@ -79,7 +79,7 @@ public abstract class BaseDao {
      * 服务于类似select count(*)、select min(columnName)等操作
      * @param sql
      * @param args
-     * @return
+     * @return null：查询失败；成功则返回查询结果
      */
     public static Object queryForSingleValue(String sql, Object ...args){
         Connection connection = JdbcUtils.getConnection();
