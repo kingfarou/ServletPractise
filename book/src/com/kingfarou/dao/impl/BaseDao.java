@@ -12,10 +12,16 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class BaseDao {
+public abstract class BaseDao {
 
     private static QueryRunner queryRunner = new QueryRunner();
 
+    /**
+     * 增删改操作
+     * @param sql
+     * @param args
+     * @return
+     */
     public static int update(String sql, String ...args){
         Connection connection = JdbcUtils.getConnection();
         try {
@@ -29,6 +35,14 @@ public class BaseDao {
         }
     }
 
+    /**
+     * 查询一个对象
+     * @param type
+     * @param sql
+     * @param args
+     * @param <T>
+     * @return
+     */
     public static <T> T queryForOne(Class<T> type, String sql, Object ...args){
         Connection connection = JdbcUtils.getConnection();
         try {
@@ -41,6 +55,14 @@ public class BaseDao {
         }
     }
 
+    /**
+     * 查询集合
+     * @param type
+     * @param sql
+     * @param args
+     * @param <T>
+     * @return
+     */
     public static <T> List<T> queryForList(Class<T> type, String sql, Object ...args){
         Connection connection = JdbcUtils.getConnection();
         try {
@@ -53,6 +75,12 @@ public class BaseDao {
         }
     }
 
+    /**
+     * 服务于类似select count(*)、select min(columnName)等操作
+     * @param sql
+     * @param args
+     * @return
+     */
     public static Object queryForSingleValue(String sql, Object ...args){
         Connection connection = JdbcUtils.getConnection();
         try {
