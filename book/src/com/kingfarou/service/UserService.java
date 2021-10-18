@@ -16,7 +16,7 @@ public interface UserService {
     /**
      * 登录
      * @param user
-     * @return null：登录失败；登陆成功返回实体对象
+     * @return null：登录失败；登录成功返回实体对象
      */
     User login(User user);
 
