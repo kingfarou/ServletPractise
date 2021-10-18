@@ -1,7 +1,7 @@
 package com.kingfarou.web;
 
 import com.kingfarou.pojo.User;
-import com.kingfarou.service.impl.UserService;
+import com.kingfarou.service.UserService;
 import com.kingfarou.service.impl.UserServiceImpl;
 
 import javax.servlet.RequestDispatcher;

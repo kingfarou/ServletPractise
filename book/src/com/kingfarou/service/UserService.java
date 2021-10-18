@@ -1,4 +1,4 @@
-package com.kingfarou.service.impl;
+package com.kingfarou.service;
 
 import com.kingfarou.pojo.User;
 

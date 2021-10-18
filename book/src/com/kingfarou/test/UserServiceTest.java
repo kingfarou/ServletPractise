@@ -1,11 +1,9 @@
 package com.kingfarou.test;
 
 import com.kingfarou.pojo.User;
-import com.kingfarou.service.impl.UserService;
+import com.kingfarou.service.UserService;
 import com.kingfarou.service.impl.UserServiceImpl;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class UserServiceTest {
 

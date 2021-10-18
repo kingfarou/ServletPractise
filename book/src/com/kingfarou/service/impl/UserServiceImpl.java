@@ -3,8 +3,9 @@ package com.kingfarou.service.impl;
 import com.kingfarou.dao.UserDao;
 import com.kingfarou.dao.impl.UserDaoImpl;
 import com.kingfarou.pojo.User;
+import com.kingfarou.service.UserService;
 
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     UserDao userDao = new UserDaoImpl();
 
