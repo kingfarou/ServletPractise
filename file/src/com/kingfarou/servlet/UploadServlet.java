@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -27,7 +28,17 @@ public class UploadServlet extends HttpServlet {
             try {
                 //解析，得到多段数据，每一段就是一个fileItem
                 List<FileItem> fileItemList = servletFileUpload.parseRequest(req);
-            } catch (FileUploadException e){
+                for(FileItem fileItem : fileItemList){
+                    if(fileItem.isFormField()){
+                        System.out.println("字段名->" + fileItem.getFieldName() + "，值->" + fileItem.getString("UTF-8"));
+                    } else {
+                        System.out.println("字段名->" + fileItem.getFieldName() + "，文件名->" + fileItem.getName());
+                        System.out.println("文件类型->" + fileItem.getContentType());
+                        File uploadTarget = new File("E:\\JavaWeb\\practise\\JavaWeb_2\\file\\web\\WEB-INF\\haha.png");
+                        fileItem.write(uploadTarget);
+                    }
+                }
+            } catch (Exception e){
                 e.printStackTrace();
             }
         } else {
