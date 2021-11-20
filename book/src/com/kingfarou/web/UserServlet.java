@@ -20,14 +20,15 @@ public class UserServlet extends BaseServlet {
 
     /**
      * 注册
+     *
      * @param req
      * @param resp
      * @throws ServletException
      * @throws IOException
      */
-    protected void regist(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    protected void regist(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = WebUtils.copyParamToBean(req.getParameterMap(), new User());
-        if(user == null){
+        if (user == null) {
             System.out.println("注入异常");
             req.setAttribute("msg", "服务器异常");
             req.setAttribute("username", req.getParameter("username"));
@@ -37,7 +38,7 @@ public class UserServlet extends BaseServlet {
         }
 
         //验证码写死，作为测试
-        if(!"abcdef".equals(req.getParameter("code"))){
+        if (!"abcdef".equals(req.getParameter("code"))) {
             System.out.println("验证码错误");
             req.setAttribute("msg", "验证码错误");
             req.setAttribute("username", user.getUsername());
@@ -47,7 +48,7 @@ public class UserServlet extends BaseServlet {
         }
 
         //用户已存在，不可重复注册
-        if(userService.existsUsername(user.getUsername())){
+        if (userService.existsUsername(user.getUsername())) {
             System.out.println("用户名已存在");
             req.setAttribute("msg", "用户名已存在，不可重复注册");
             req.setAttribute("username", user.getUsername());
@@ -63,14 +64,15 @@ public class UserServlet extends BaseServlet {
 
     /**
      * 登录
+     *
      * @param req
      * @param resp
      * @throws ServletException
      * @throws IOException
      */
-    protected void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    protected void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = WebUtils.copyParamToBean(req.getParameterMap(), new User());
-        if(user == null){
+        if (user == null) {
             System.out.println("登录失败");
             req.setAttribute("msg", "服务器异常");
             req.setAttribute("username", req.getParameter("username"));
@@ -78,12 +80,12 @@ public class UserServlet extends BaseServlet {
             return;
         }
 
-        user = userService.login(user);
+        User loginUser = userService.login(user);
         //登录失败
-        if (user == null) {
+        if (loginUser == null) {
             System.out.println("登录失败");
             req.setAttribute("msg", "用户名或密码错误");
-            req.setAttribute("username", req.getParameter("username"));
+            req.setAttribute("username", user.getUsername());
             req.getRequestDispatcher("/pages/user/login.jsp").forward(req, resp);
         } else {
             //登录成功
