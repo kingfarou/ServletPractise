@@ -11,40 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
-public class UserServlet extends HttpServlet {
+public class UserServlet extends BaseServlet {
 
     private UserService userService = new UserServiceImpl();
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-        try {
-            Method method = UserServlet.class.getDeclaredMethod(action, HttpServletRequest.class, HttpServletResponse.class);
-            method.invoke(this, req, resp);
-        } catch (Exception e){
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-
-        User user = userService.login(new User(null, username, password, null));
-        //登录失败
-        if (user == null) {
-            System.out.println("登录失败");
-            req.setAttribute("msg", "用户名或密码错误");
-            req.setAttribute("username", username);
-            req.getRequestDispatcher("/pages/user/login.jsp").forward(req, resp);
-        } else {
-            //登录成功
-            System.out.println("登录成功");
-            req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req, resp);
-        }
-    }
-
+    /**
+     * 注册
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     private void regist(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         String code = req.getParameter("code");
         String username = req.getParameter("username");
@@ -74,5 +51,30 @@ public class UserServlet extends HttpServlet {
         System.out.println("注册成功");
         userService.registerUser(new User(null, username, password, email));
         req.getRequestDispatcher("/pages/user/regist_success.jsp").forward(req, resp);
+    }
+
+    /**
+     * 登录
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    private void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+
+        User user = userService.login(new User(null, username, password, null));
+        //登录失败
+        if (user == null) {
+            System.out.println("登录失败");
+            req.setAttribute("msg", "用户名或密码错误");
+            req.setAttribute("username", username);
+            req.getRequestDispatcher("/pages/user/login.jsp").forward(req, resp);
+        } else {
+            //登录成功
+            System.out.println("登录成功");
+            req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req, resp);
+        }
     }
 }
