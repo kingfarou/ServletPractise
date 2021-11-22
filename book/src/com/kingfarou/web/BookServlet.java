@@ -6,7 +6,6 @@ import com.kingfarou.service.impl.BookServiceImpl;
 import com.kingfarou.utils.WebUtils;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -37,7 +36,17 @@ public class BookServlet extends BaseServlet {
         Book book = WebUtils.copyParamToBean(req.getParameterMap(), new Book());
         //保存图书到数据库
         bookService.addBook(book);
-        //返回图书列表界面给浏览器
+        //返回图书列表界面给浏览器，重定向防止表单重复提交
+        resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=list");
+    }
+
+    protected void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("删除图书");
+        //获取图书id
+        int id = WebUtils.parseInt(req.getParameter("id"), 0);
+        //删除
+        bookService.deleteBookById(id);
+        //返回图书列表给浏览器
         resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=list");
     }
 }
