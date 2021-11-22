@@ -40,6 +40,9 @@ public class BookServlet extends BaseServlet {
         resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=list");
     }
 
+    /**
+     * 删除图书
+     */
     protected void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("删除图书");
         //获取图书id
@@ -48,5 +51,18 @@ public class BookServlet extends BaseServlet {
         bookService.deleteBookById(id);
         //返回图书列表给浏览器
         resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=list");
+    }
+
+    /**
+     * 获取图书详情
+     */
+    protected void getBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("获取图书详情");
+        //获取请求参数
+        int id = WebUtils.parseInt(req.getParameter("id"), 0);
+        //查询图书详情给
+        Book book = bookService.queryBookById(id);
+        req.setAttribute("book", book);
+        req.getRequestDispatcher("/pages/manager/book_edit.jsp").forward(req, resp);
     }
 }
