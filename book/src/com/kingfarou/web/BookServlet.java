@@ -65,4 +65,17 @@ public class BookServlet extends BaseServlet {
         req.setAttribute("book", book);
         req.getRequestDispatcher("/pages/manager/book_edit.jsp").forward(req, resp);
     }
+
+    /**
+     * 更新图书信息
+     */
+    protected void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("修改图书信息");
+        //获取请求参数
+        Book book = WebUtils.copyParamToBean(req.getParameterMap(), new Book());
+        //查询图书详情给
+        bookService.updateBook(book);
+        //返回jsp界面
+        resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=list");
+    }
 }
