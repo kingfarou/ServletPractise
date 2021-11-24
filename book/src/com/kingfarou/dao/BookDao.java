@@ -43,13 +43,13 @@ public interface BookDao {
      * 查询图书总数
      * @return
      */
-    long queryBookCount();
+    long queryForBookTotalCount();
 
     /**
      * 分页获取图书列表
-     * @param currentPage 当前页码
+     * @param begin 开始位置
      * @param pageSize 每页数据量
      * @return
      */
-    List<Book> page(Long currentPage, Integer pageSize);
+    List<Book> queryForPageItems(Long begin, Integer pageSize);
 }

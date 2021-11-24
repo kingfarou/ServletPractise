@@ -1,6 +1,7 @@
 package com.kingfarou.test;
 
 import com.kingfarou.pojo.Book;
+import com.kingfarou.pojo.Page;
 import com.kingfarou.service.BookService;
 import com.kingfarou.service.impl.BookServiceImpl;
 import org.junit.Test;
@@ -40,5 +41,10 @@ public class BookServiceTest {
         for(Book book : bookList){
             System.out.println(book);
         }
+    }
+
+    @Test
+    public void page() {
+        System.out.println(bookService.page(2, Page.PAGE_SIZE));
     }
 }

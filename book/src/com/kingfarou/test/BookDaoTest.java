@@ -3,6 +3,7 @@ package com.kingfarou.test;
 import com.kingfarou.dao.BookDao;
 import com.kingfarou.dao.impl.BookDaoImpl;
 import com.kingfarou.pojo.Book;
+import com.kingfarou.pojo.Page;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -37,6 +38,19 @@ public class BookDaoTest {
     @Test
     public void queryBooks() {
         List<Book> bookList = bookDao.queryBooks();
+        for(Book book : bookList){
+            System.out.println(book);
+        }
+    }
+
+    @Test
+    public void queryForBookTotalCount() {
+        System.out.println("图书总数->" + bookDao.queryForBookTotalCount());
+    }
+
+    @Test
+    public void queryForPageItems() {
+        List<Book> bookList = bookDao.queryForPageItems(8L, Page.PAGE_SIZE);
         for(Book book : bookList){
             System.out.println(book);
         }
