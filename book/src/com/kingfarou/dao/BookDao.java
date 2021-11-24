@@ -38,4 +38,18 @@ public interface BookDao {
      * @return
      */
     public List<Book> queryBooks();
+
+    /**
+     * 查询图书总数
+     * @return
+     */
+    long queryBookCount();
+
+    /**
+     * 分页获取图书列表
+     * @param currentPage 当前页码
+     * @param pageSize 每页数据量
+     * @return
+     */
+    List<Book> page(Long currentPage, Integer pageSize);
 }

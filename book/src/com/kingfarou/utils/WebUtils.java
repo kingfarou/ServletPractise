@@ -1,9 +1,11 @@
 package com.kingfarou.utils;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.logging.Log;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class WebUtils {
 
@@ -34,7 +36,7 @@ public class WebUtils {
         try {
             return Integer.parseInt(intString);
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            System.out.println("WebUtils异常->" + e.getMessage());
             return defaultValue;
         }
     }
