@@ -34,7 +34,7 @@ public class WebUtils {
         try {
             return Integer.parseInt(intString);
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            System.out.println("parseInt()异常->" + e.getMessage());
             return defaultValue;
         }
     }

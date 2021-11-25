@@ -1,6 +1,7 @@
 package com.kingfarou.service;
 
 import com.kingfarou.pojo.Book;
+import com.kingfarou.pojo.Page;
 
 import java.util.List;
 
@@ -38,4 +39,12 @@ public interface BookService {
      * @return
      */
     public List<Book> queryBooks();
+
+    /**
+     * 图书分页查找
+     * @param pageNo 当前页码
+     * @param pageSize 每页数据量
+     * @return
+     */
+    Page<Book> page(Integer pageNo, Integer pageSize);
 }

@@ -1,6 +1,7 @@
 package com.kingfarou.web;
 
 import com.kingfarou.pojo.Book;
+import com.kingfarou.pojo.Page;
 import com.kingfarou.service.BookService;
 import com.kingfarou.service.impl.BookServiceImpl;
 import com.kingfarou.utils.WebUtils;
@@ -77,5 +78,21 @@ public class BookServlet extends BaseServlet {
         bookService.updateBook(book);
         //返回jsp界面
         resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=list");
+    }
+
+    /**
+     * 分页查找
+     */
+    protected void page(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("分页查找");
+        //前端传递：当前页码，每页数据量
+        Integer pageNo = WebUtils.parseInt(req.getParameter("pageNo"), 1);
+        Integer pageSize = WebUtils.parseInt(req.getParameter("pageSize"), Page.DEFAULT_PAGE_SIZE);
+        //后端返回：当前页的数据，但是界面还需要显示：当前页码，总页数，总记录数，每页数据量
+        //由于servlet只负责转发，不加工数据，所以所有数据需要service包装在一个对象里返回
+        Page<Book> page = bookService.page(pageNo, pageSize);
+        //转发到jsp界面
+        req.setAttribute("page", page);
+        req.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(req, resp);
     }
 }

@@ -38,4 +38,18 @@ public interface BookDao {
      * @return
      */
     public List<Book> queryBooks();
+
+    /**
+     * 分页查找数据
+     * @param offset 起始位置，从0开始
+     * @param pageSize 每页数据量
+     * @return
+     */
+    List<Book> page(Integer offset, Integer pageSize);
+
+    /**
+     * 获取数据总数量
+     * @return
+     */
+    Integer queryBookSum();
 }

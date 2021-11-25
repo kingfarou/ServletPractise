@@ -41,4 +41,17 @@ public class BookDaoTest {
             System.out.println(book);
         }
     }
+
+    @Test
+    public void page() {
+        List<Book> bookList = bookDao.page(4, 8);
+        for(Book book : bookList){
+            System.out.println(book);
+        }
+    }
+
+    @Test
+    public void queryBookSum() {
+        System.out.println("总数据量->" + bookDao.queryBookSum());
+    }
 }
