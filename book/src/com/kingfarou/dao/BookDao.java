@@ -40,16 +40,16 @@ public interface BookDao {
     public List<Book> queryBooks();
 
     /**
-     * 查询图书总数
-     * @return
-     */
-    long queryForBookTotalCount();
-
-    /**
-     * 分页获取图书列表
-     * @param begin 开始位置
+     * 分页查找数据
+     * @param offset 起始位置，从0开始
      * @param pageSize 每页数据量
      * @return
      */
-    List<Book> queryForPageItems(Long begin, Integer pageSize);
+    List<Book> page(Integer offset, Integer pageSize);
+
+    /**
+     * 查询图书总数量
+     * @return
+     */
+    Integer queryBookSum();
 }

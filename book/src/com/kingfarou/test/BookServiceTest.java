@@ -45,6 +45,7 @@ public class BookServiceTest {
 
     @Test
     public void page() {
-        System.out.println(bookService.page(2, Page.PAGE_SIZE));
+        Page<Book> page = bookService.page(2, 4);
+        System.out.println(page);
     }
 }

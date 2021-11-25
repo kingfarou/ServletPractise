@@ -44,15 +44,15 @@ public class BookDaoTest {
     }
 
     @Test
-    public void queryForBookTotalCount() {
-        System.out.println("图书总数->" + bookDao.queryForBookTotalCount());
-    }
-
-    @Test
-    public void queryForPageItems() {
-        List<Book> bookList = bookDao.queryForPageItems(8L, Page.PAGE_SIZE);
+    public void page() {
+        List<Book> bookList = bookDao.page(4, 8);
         for(Book book : bookList){
             System.out.println(book);
         }
+    }
+
+    @Test
+    public void queryBookSum() {
+        System.out.println("总数据量->" + bookDao.queryBookSum());
     }
 }

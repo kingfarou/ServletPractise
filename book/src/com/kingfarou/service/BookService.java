@@ -41,10 +41,10 @@ public interface BookService {
     public List<Book> queryBooks();
 
     /**
-     * 分页查找
-     * @param currentPage 当前页码
+     * 图书分页查找
+     * @param pageNo 当前页码
      * @param pageSize 每页数据量
      * @return
      */
-    Page<Book> page(long currentPage, Integer pageSize);
+    Page<Book> page(Integer pageNo, Integer pageSize);
 }

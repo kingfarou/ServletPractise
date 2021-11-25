@@ -38,24 +38,25 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Page<Book> page(long pageNo, Integer pageSize) {
+    public Page<Book> page(Integer pageNo, Integer pageSize) {
+        //需要返回：当前页数据，总数据量，总页数
         Page<Book> page = new Page<>();
         page.setPageNo(pageNo);
         page.setPageSize(pageSize);
-        //图书总数
-        long sum = bookDao.queryForBookTotalCount();
-        page.setPageTotalCount(sum);
-        //总页数
-        long pageCount = sum/pageSize;
-        if(sum % pageSize > 0){
-            pageCount+=1;
-        }
-        page.setPageTotal(pageCount);
         //当前页数据
-        //根据当前页码计算起始位置
-        long begin = (pageNo - 1) * pageSize;
-        List<Book> books = bookDao.queryForPageItems(begin, pageSize);
-        page.setItems(books);
+        Integer offset = (pageNo - 1) * pageSize;
+        List<Book> bookList = bookDao.page(offset, pageSize);
+        page.setItems(bookList);
+        //总数据量
+        Integer sum = bookDao.queryBookSum();
+        page.setSum(sum);
+        //总页数：通过总数据量算出来的
+        int pageTotalCount = sum/pageSize;
+        if(sum % pageSize > 0){
+            pageTotalCount += 1;
+        }
+        page.setPageTotalCount(pageTotalCount);
+        //返回
         return page;
     }
 }

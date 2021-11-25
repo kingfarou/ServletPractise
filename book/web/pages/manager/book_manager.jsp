@@ -72,17 +72,17 @@
 			</tr>
 		</table>
 
-        <div id="page_nav">
-            <a href="#">首页</a>
-            <a href="#">上一页</a>
-            <a href="#">3</a>
-            【${requestScope.page.pageNo}】
-            <a href="#">5</a>
-            <a href="#">下一页</a>
-            <a href="#">末页</a>
-            共${requestScope.page.pageTotal}页，${requestScope.page.pageTotalCount}条记录 到第<input value="4" name="pn" id="pn_input"/>页
-            <input type="button" value="确定">
-        </div>
+		<div id="page_nav">
+			<a href="#">首页</a>
+			<a href="#">上一页</a>
+			<a href="#">3</a>
+			【${requestScope.page.pageNo}】
+			<a href="#">5</a>
+			<a href="#">下一页</a>
+			<a href="#">末页</a>
+			共${requestScope.page.pageTotalCount}页，${requestScope.page.sum}条记录 到第<input value="4" name="pn" id="pn_input"/>页
+			<input type="button" value="确定">
+		</div>
 	</div>
 
 

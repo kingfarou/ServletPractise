@@ -84,14 +84,14 @@ public class BookServlet extends BaseServlet {
      * 分页查找
      */
     protected void page(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //界面提供：当前页码，每页数据量
-        long pageNo = WebUtils.parseInt(req.getParameter("pageNo"), 1);
-        Integer pageSize = WebUtils.parseInt(req.getParameter("pageSize"), Page.PAGE_SIZE);
-        //数据库返回：总页数，当前页数据，总数据量
-        //然而由于前端界面还需要当前页码，每页数据量，同时servlet只负责界面交互，
-        //不处理数据，所以service需要将所有数据包装成对象返回
+        System.out.println("分页查找");
+        //前端传递：当前页码，每页数据量
+        Integer pageNo = WebUtils.parseInt(req.getParameter("pageNo"), 1);
+        Integer pageSize = WebUtils.parseInt(req.getParameter("pageSize"), Page.DEFAULT_PAGE_SIZE);
+        //后端返回：当前页的数据，但是界面还需要显示：当前页码，总页数，总记录数，每页数据量
+        //由于servlet只负责转发，不加工数据，所以所有数据需要service包装在一个对象里返回
         Page<Book> page = bookService.page(pageNo, pageSize);
-        //请求转发
+        //转发到jsp界面
         req.setAttribute("page", page);
         req.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(req, resp);
     }
